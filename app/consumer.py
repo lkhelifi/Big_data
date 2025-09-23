@@ -12,7 +12,7 @@ def main():
     # Connexion au broker Kafka
     consumer = KafkaConsumer(
         topic,
-        bootstrap_servers=['kafka:9092'],
+        bootstrap_servers=['kafka:9092'], # Même BROKER que le producteur
         auto_offset_reset='earliest',  # lire depuis le début si jamais il y a déjà des messages
         enable_auto_commit=True,
         group_id="my-group",
