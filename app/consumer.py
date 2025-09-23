@@ -9,7 +9,7 @@ def main():
 
     topic = sys.argv[1]
 
-    # Connexion au broker Kafka (ici via docker-compose)
+    # Connexion au broker Kafka
     consumer = KafkaConsumer(
         topic,
         bootstrap_servers=['kafka:9092'],
@@ -21,7 +21,6 @@ def main():
 
     print(f"📡 Consommateur démarré. Lecture en temps réel du topic '{topic}'...")
 
-    # Boucle infinie de consommation
     for message in consumer:
         print(f"Message reçu: {message.value}")
 
