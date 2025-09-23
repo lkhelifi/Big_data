@@ -9,7 +9,7 @@ producer = KafkaProducer(
 
 # Message JSON
 message = {"msg": "Hello Kafka"}
-producer.send('weather_stream', value=message)
+producer.send('weather_stream', value=message) # en attente d'envoi
 
-producer.flush()
+producer.flush() # Envoi forcé, attend la confirmation du broker
 print("Message envoyé :", message)
