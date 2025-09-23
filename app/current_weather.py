@@ -2,7 +2,6 @@ import sys
 import json
 import requests
 from kafka import KafkaProducer
-from time import sleep
 
 # Vérification des arguments
 if len(sys.argv) != 3:
@@ -17,7 +16,7 @@ url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={lo
 
 # Configuration du producteur Kafka
 producer = KafkaProducer(
-    bootstrap_servers='kafka:9092',  # nom du service Kafka dans docker-compose
+    bootstrap_servers='kafka:9092',  # Même BROKER que le consommateur
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
@@ -33,8 +32,7 @@ try:
             producer.send(topic, current)
         else:
             print(f"Erreur API : {response.status_code}")
-        
-        sleep(60)  # envoie toutes les 60 secondes
+
 except KeyboardInterrupt:
     print("Arrêt du producteur")
 finally:
